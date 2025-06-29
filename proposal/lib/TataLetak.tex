@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FILE INI JANGAN DI UBAH ATAU MODIFIKASI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\normalsize
+\pagenumbering{roman}
+\singlespacing
+ \hyphenpenalty=1000
+\tolerance=1000
+\emergencystretch=2.5em
+% Cover
+%\addcontentsline{toc}{chapter}{Cover}
+\input{./lib/cover.tex}
+\cleardoublepage
+% Lembar pengesahan
+\addcontentsline{toc}{chapter}{LEMBAR PENGESAHAN}
+\input{./lib/pengesahan.tex}
+\cleardoublepage
+
+\ifthenelse{\boolean{bThesis}}
+{
+	\ifthenelse{\boolean{bMaster}}
+	{
+\chapter*{PERNYATAAN KEASLIAN TESIS}
+\addcontentsline{toc}{chapter}{PERNYATAAN KEASLIAN TESIS}
+
+
+\begin{spacing}{1.5}
+	
+	Dengan ini saya menyatakan bahwa isi keseluruhan Tesis saya dengan judul \textbf{\JdTesis} adalah benar-benar hasil karya intelektual mandiri, diselesaikan tanpa menggunakan bahan-bahan yang tidak diijinkan dan bukan merupakan karya pihak lain yang saya akui sebagai karya sendiri.
+	
+	Semua referensi yang dikutip maupun dirujuk telah ditulis secara lengkap pada daftar pustaka. Apabila ternyata pernyataan ini tidak benar, saya bersedia menerima sanksi sesuai peraturan yang berlaku.
+	
+	\hspace{30ex}Surabaya \today
+	
+	\vspace{10ex}
+	
+	\hspace{35ex}\underline{\NamaMahasiswa}
+	
+	\hspace{35ex}Nrp :\NrpMahasiswa
+	
+\end{spacing}
+\cleardoublepage
+
+}
+{
+	
+	\chapter*{PERNYATAAN KEASLIAN DISERTASI}
+	\addcontentsline{toc}{chapter}{PERNYATAAN KEASLIAN DISERTASI}
+	
+	\begin{spacing}{1.5}
+		
+		Dengan ini saya menyatakan bahwa isi keseluruhan Disertasi  saya dengan judul \textbf{\JdTesis} adalah benar-benar hasil karya intelektual mandiri, diselesaikan tanpa menggunakan bahan-bahan yang tidak diijinkan dan bukan merupakan karya pihak lain yang saya akui sebagai karya sendiri.
+	
+	Semua referensi yang dikutip maupun dirujuk telah ditulis secara lengkap pada daftar pustaka. Apabila ternyata pernyataan ini tidak benar, saya bersedia menerima sanksi sesuai peraturan yang berlaku.
+	
+	\hspace{30ex}Surabaya \today
+	
+	\vspace{10ex}
+	
+	\hspace{35ex}\underline{\NamaMahasiswa}
+	
+	\hspace{35ex}Nrp :\NrpMahasiswa
+	
+\end{spacing}
+\cleardoublepage
+}
+}{}
+
+
+
+
+% Kata pengantar
+\newpage
+
+\addcontentsline{toc}{chapter}{PREFACE}
+\input{../ubah/pengantar}
+\cleardoublepage
+\newpage
+% Abstrak
+%\input{ubah/abstrak}
+%\cleardoublepage
+\ifthenelse{\boolean{JudulTesisEng}}
+{
+	\input{../ubah/abstrakEng}
+}{}
+\cleardoublepage
+
+% Daftar isi
+\renewcommand*\contentsname{TABLE OF CONTENTS}
+\titlespacing*{\chapter}{0pt}{0ex}{0ex}
+\tableofcontents
+\cleardoublepage
+% Daftar gambar
+\renewcommand*\listfigurename{LIST OF FIGURES}
+\addcontentsline{toc}{chapter}{\listfigurename}
+\titlespacing*{\chapter}{0pt}{0ex}{0ex}
+\listoffigures
+\cleardoublepage
+% Daftar tabel
+\renewcommand*\listtablename{LIST OF TABLES}
+\addcontentsline{toc}{chapter}{\listtablename}
+\titlespacing*{\chapter}{0pt}{0ex}{0ex}
+\listoftables
+\cleardoublepage
+% Nomenklatur
+\addcontentsline{toc}{chapter}{NOMENCLATURE} % kata pengantar
+\input{../ubah/nomenklatur}
+\cleardoublepage
+
+% Bab isi buku
+\titleformat{\chapter}[display]{\bfseries\Large}{BAB \centering\thechapter}{0ex}{\vspace{0ex}\centering}[\vspace{0ex}]
+\titleformat{\section}{\bfseries\large}{\MakeUppercase{\thesection}}{1ex}{}
+\titleformat{\subsection}{\bfseries\large}{\MakeUppercase{\thesubsection}}{1ex}{}
+\titleformat{\subsubsection}{\bfseries\large}{\MakeUppercase{\thesubsubsection}}{1ex}{}
+\titlespacing*{\chapter}{0pt}{-4ex}{0pt}
+\titlespacing{\section}{0pt}{0pt}{0pt}
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
+% Indent paragraph
+\setlength{\parindent}{0.8cm}

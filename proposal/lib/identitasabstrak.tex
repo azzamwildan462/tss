@@ -1,0 +1,42 @@
+\begin{center}
+		\large\textbf{\JdTesis}
+	\end{center}
+	\normalsize
+	\begin{adjustwidth}{-0.2cm}{}
+		\ifthenelse{\boolean{bMaster}}{
+		
+		\begin{tabular}{lcp{0.9\linewidth}}
+		Nama Mahasiswa &:& \NamaMahasiswa\\
+			NRP &:&\NrpMahasiswa\\
+			Pembimbing &:& 1. \PbSatu\\
+			\ifthenelse{\boolean{PembimbingDua}}{& & 2. \PbDua\\}{}
+			
+			\ifthenelse{\boolean{PembimbingTiga}}{& & 3. \PbTiga\\}{}
+			
+			
+			
+		\end{tabular}
+	}{
+	\begin{tabular}{lcp{0.7\linewidth}}
+		Nama Mahasiswa &:& \NamaMahasiswa\\
+		NRP &:&\NrpMahasiswa\\
+		Promotor &:&  \PbSatu\\
+		\ifthenelse{\boolean{PembimbingTiga}}{
+		\ifthenelse{\boolean{PembimbingDua}}{Co. Promotor&: & 1. \PbDua\\}{}
+		\ifthenelse{\boolean{PembimbingTiga}}{& & 2. \PbTiga\\}{}
+	}
+{
+	\ifthenelse{\boolean{PembimbingDua}}{\hspace{5ex}Co. Promotor&: & \PbDua\\}{}
+	
+}
+	\end{tabular}
+
+}
+
+	
+	\end{adjustwidth}
+	\vspace{2ex}
+	\begin{center}
+		\Large\textbf{ABSTRAK}
+	\end{center}
+	\vspace{1ex}

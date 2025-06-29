@@ -1,0 +1,40 @@
+\begin{spacing}{1.2}
+	\chapter{INTRODUCTION}
+  \end{spacing}
+  
+  \pagenumbering{arabic}
+  \vspace{4ex}
+  
+  \section{Background}
+  Icar is an autonomous vehicle developed by Institut Teknologi Sepuluh Nopember (ITS). Icar is designed to operate automatically and navigate throughout the ITS campus. Its control system relies on pose estimation (i.e., position and orientation) derived from odometry and sensor fusion with the Global Navigation Satellite System (GNSS). The estimated pose is then used to guide Icar toward a predetermined destination.
+  
+  \par
+  The pose of Icar is determined through the combination of odometry and GNSS data. Odometry estimates pose based on wheel rotations, augmented by a gyroscope to obtain orientation. GNSS, on the other hand, estimates pose based on satellite signals. These two sources are fused using the Extended Kalman Filter algorithm to achieve higher accuracy in pose estimation \cite{ref_mas_marin}.
+  
+  \par 
+  However, the data provided by GNSS is not always fully reliable. Several environmental conditions, such as tall buildings or dense tree canopies, can obstruct satellite signals. This may cause a phenomenon known as multipath, in which satellite signals reach the receiver via multiple indirect paths, resulting in errors in position and orientation estimation \cite{ref_gnss_multipath}.
+  
+  \par 
+  Errors can also arise from the odometry system due to factors such as inaccurate wheel travel distance, incorrect wheel rotation angle calculations, or faulty IMU sensor readings. These inaccuracies may result from differences in wheel diameters, uneven tire pressure, or wheel slippage. Moreover, errors in wheel rotation angle measurements may originate from malfunctioning encoder sensors \cite{ref_odom_error}.
+  
+  \par
+  When errors occur in pose estimation, Icar may deviate from its intended trajectory. This can lead to safety concerns, such as collisions with obstacles or deviation from designated transportation lanes. Therefore, an additional navigation system is required to enhance pose accuracy and ensure safe autonomous navigation.
+  
+  \par
+  A promising enhancement is the integration of a stereo depth camera, which provides visual depth information to detect roads. This road detection process employs a machine learning algorithm—specifically, semantic segmentation—trained on labeled datasets to distinguish between road and non-road areas \cite{ref_mas_pandu}.
+  
+  \par 
+  Beyond road detection, the stereo depth camera is also used to refine pose estimation through graph-based optimization. Furthermore, a LIDAR sensor is incorporated and processed using the Iterative Closest Point (ICP) algorithm to further improve localization accuracy. Together, these methods form a Simultaneous Localization and Mapping (SLAM) system \cite{thrun2005probabilistic}, which is expected to potentially replace the role of GNSS entirely.
+  
+  \section{Formulation of the Problem}
+  The main issue with Icar lies in its navigation system's heavy dependence on GNSS. When GNSS signal errors occur, or when odometry is affected by slippage or IMU drift, the resulting pose estimation becomes inaccurate. Consequently, Icar may deviate from its intended path, increasing the risk of collisions or deviation from public transportation routes.
+  
+  \section{Objective}
+  The objective of this research is to develop a robust navigation system for Icar that is capable of correcting pose estimation errors caused by GNSS inaccuracies or odometry drift. This system incorporates a stereo depth camera and LIDAR to perform both road detection and pose correction. The goal is to enable Icar to navigate more accurately and reliably in dynamic environments.
+  
+  \section{Scope and Limitations}
+  This study focuses exclusively on Icar, an autonomous vehicle developed by ITS. The scope is limited to the development and implementation of a navigation system that utilizes a stereo depth camera and LIDAR. This research does not cover the electronic or mechanical aspects of Icar’s control system.
+  
+  \section{Contribution}
+  The expected contribution of this research is to provide a reference framework for enhancing the accuracy and safety of autonomous vehicle navigation systems. By integrating advanced perception and localization technologies, Icar is expected to achieve improved trajectory tracking and obstacle avoidance, supporting its intended operation in complex urban environments.
+  

@@ -1,0 +1,23 @@
+%\\renewcommand\bibname{Daftar Pustaka}
+%\\addcontentsline{toc}{chapter}{\bibname}
+%\\titlespacing*{\chapter}{0pt}{0ex}{5ex}
+%\\appendix
+%\%\bibliographystyle{apalike}
+%\%\bibliographystyle{ieetr}
+%\%\bibliographystyle{IEEEtranN}
+%\\bibliographystyle{plainnat}
+%\\bibliography{./ubah/pustaka}
+%\\cleardoublepage
+%\gdef \bibname{Daftar Pustaka}
+\renewcommand \bibname {Bibliography}
+\addcontentsline{toc}{chapter}{\bibname}
+\titlespacing*{\chapter}{0pt}{0ex}{5ex}
+\appendix
+%\bibliographystyle{IEEEtranN}
+% \bibliographystyle{IEEEtran} % ku ganti
+\bibliographystyle{plain} % ku ganti
+\bibliography{IEEEabrv,../ubah/pustaka.bib}
+%\bibliography{IEEEabrv,pustaka.bib}
+%\bibliography{../ubah/pustaka.bib}
+%\bibliography{library}
+\cleardoublepage

@@ -1,0 +1,99 @@
+	\ifthenelse{\boolean{bThesis}}
+{
+   \AddToShipoutPicture*{\BackgroundIm}
+\begin{center}
+
+\Large\textbf{\pPengesahan}
+%\Large\textbf{PROPOSAL TESIS}
+\end{center}
+\begin{center}
+\tsss\\
+\textbf{\ggGelar}\\
+di\\
+\textbf{Institut Teknologi Sepuluh Nopember}\\
+\vspace{1ex}
+Oleh:\\
+\textbf{\NamaMahasiswa}\\ 
+\textbf{NRP:\NrpMahasiswa}\\ 
+\vspace{1ex}
+Tanggal Ujian :\TglUjian\\
+Periode Wisuda : \PerWisuda\\
+\vspace{1ex}
+\end{center}
+\begin{center}
+Disetujui oleh:\\
+\textbf{Pembimbing}:
+\end{center}
+\begin{enumerate}
+\item \PbSatu \hfill ...............................\\
+NIP:\NipPbSatu  \ifthenelse{\boolean{PembimbingDua}}{ \vfill \vspace{1ex} \item \PbDua\hfill ...............................\\
+NIP:\NipPbDua} 
+\vfill     \ifthenelse{\boolean{PembimbingTiga}}{ \vspace{1ex}  \item \PbTiga \hfill ...............................\\
+NIP:\NipPbTiga}{}
+\end{enumerate}	
+
+\begin{center}
+	\textbf{Penguji}:
+\end{center}
+\begin{enumerate}
+	\item \PjSatu \hfill ...............................\\
+	NIP:\NipPjSatu\vfill
+	\item \PjDua \hfill ...............................\\
+	NIP:\NipPjDua\vfill \ifthenelse{\boolean{PengujiTiga}}{\item \PjTiga \hfill ...............................\\NIP:\NipPjTiga\vfill}{}
+    \ifthenelse{\boolean{PengujiEmpat}}{\item \PjEmpat \hfill ...............................\\ NIP:\NipPjEmpat}{}
+\end{enumerate}	
+\vfill
+\begin{center}
+	Kepala Departemen \Dep \\
+	Fakultas \fak\\
+	\vspace{9ex}
+	\underline{\NmKaDep}\\
+	Nip:\NipKaDep
+\end{center}
+\newpage
+}
+{
+
+\begin{center}
+	\textbf{LEMBAR PENGESAHAN\\
+		\ifthenelse{\boolean{bMaster}}{PROPOSAL TESIS}{PROPOSAL DISERTASI}}\\    
+\end{center}
+\vspace{5ex}
+\begin{tabular}{p{2cm} c p{8cm}}
+	Judul&:&\JdTesis\\
+	Oleh &:&\NamaMahasiswa\\
+	Nrp&:&\NrpMahasiswa
+\end{tabular}
+\vspace{5ex}
+\begin{center}
+	\textbf{Telah Diseminarkan  Pada}
+\end{center}
+
+
+\begin{tabular}{p{2cm} c p{8cm}}
+	Hari&:&\bHariUjian\\
+	Tanggal &:&\TglUjian\\
+	Tempat&:&\bTempatUjian
+\end{tabular}
+
+
+\vspace{5ex}
+\begin{tabular}{ p{6cm} p{6cm} }
+	\textbf{Penguji}& \ifthenelse{\boolean{bMaster}}{\textbf{Calon Pembimbing}}{\textbf{Promotor}}\\	
+	\vspace{8ex}1. \PjSatu&
+	\vspace{8ex}1. \PbSatu\\
+	\hspace{3ex}\NipPjSatu &
+	\hspace{3ex}\NipPbSatu\\
+	\vspace{8ex}2. \PjDua&
+	\ifthenelse{\boolean{PembimbingDua}}{\vspace{8ex}2. \PbDua}{}\\
+	\hspace{3ex}\NipPjDua&
+	\ifthenelse{\boolean{PembimbingDua}}{\hspace{3ex}\NipPbDua}{}\\
+	\ifthenelse{\boolean{PengujiTiga}}{\vspace{8ex}3. \PjTiga}{}&
+	\ifthenelse{\boolean{PembimbingTiga}}{\vspace{8ex}3. \PbTiga}{}\\
+	\ifthenelse{\boolean{PengujiTiga}}{\hspace{3ex}\NipPjTiga}{}&
+	\ifthenelse{\boolean{PembimbingTiga}}{\hspace{3ex}\NipPbTiga}{}\\
+	\ifthenelse{\boolean{PengujiEmpat}}{\vspace{8ex}4. \PjEmpat}{}&\\
+	\ifthenelse{\boolean{PengujiEmpat}}{\hspace{3ex}\NipPjEmpat}{}& 
+\end{tabular}
+\newpage
+}

@@ -1,0 +1,48 @@
+\begin{FontCover}
+	\sffamily	
+\thispagestyle{empty}
+\begin{figure} [!t]
+	\includegraphics[keepaspectratio=true,scale=1,left]{./lib/LogoITS.png}
+	\caption*{}
+	\label{fig:LogoITS}
+\end{figure}
+\vspace{1ex}
+%\noindent\makebox[\linewidth]{\rule{\paperwidth}{10pt}}
+\makebox[\linewidth]{\includegraphics[keepaspectratio=true,width=\paperwidth]{./lib/\bbelt}}
+\vspace{10ex}
+\justify
+\textbf{\Kodekk}
+\vspace{1ex}
+\justify
+\Large
+\begin{spacing}{1}
+%Masukan Judul Tesis Disini
+\flushleft
+\textbf{\JdTesisEng}
+\end{spacing}
+\normalsize
+\vfill
+\justify
+
+%\begin{spacing}{1}
+\large
+\MakeUppercase{\NamaMahasiswa}\\
+NRP  \uppercase{\NrpMahasiswa}
+\vspace{2ex}
+\justify
+\normalsize
+
+\ifthenelse{\boolean{bMaster}}{\textbf{SUPERVISOR}}{\textbf{PROMOTOR}}\\
+\PbSatu\\
+\ifthenelse{\boolean{PembimbingDua}}{\ifthenelse{\boolean{bMaster}}{}{\\\textbf{Co.PROMOTOR\\}}}{}
+\ifthenelse{\boolean{PembimbingDua}}{\PbDua\\}{}
+\ifthenelse{\boolean{PembimbingTiga}}{\PbTiga\\}{}
+ 
+\vfill
+\justify
+\bdk
+\vspace{1ex}
+%\rmfamily
+\normalfont
+\end{FontCover}
+\newpage

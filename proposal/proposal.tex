@@ -1,0 +1,156 @@
+%*********************************
+%Format telah disesuaikan sesuai *
+%Panduan penulisan               *
+%Disertasi Dan Tesis ITS         *
+%*********************************
+\documentclass[12pt, a4paper,twoside, bahasa]{report}
+%\documentclass[12pt, a4paper,twoside]{report}
+
+\title{Buku Tesis}
+% Jika pakai windows untuk run
+%    pertama kali dan error.
+% Mohon cek miktex console jika 
+%    compiler latex nya menggunakan miktex. 
+%------------------------------
+\input{./lib/init.tex}
+\usepackage{placeins}
+
+
+
+%************************************
+% 1. JENIS BUKU
+%    Pilih Salah Satu 
+%************************************
+%     \ProposalDisertasi
+     \ProposalTesis 
+%     \Tesis{Magister Teknik (MT)}
+%\Disertasi{Doktor (Dr)}
+%***************************
+
+%\ProposalDisertasi
+%\ProposalTesis 
+%\Tesis{Magister Teknik (MT)}
+%\Disertasi{Doktor (Dr)}
+
+
+%*******************************
+%2.  Tulislah Kode Yang Sesuai 
+%*******************************
+%\Kode{DISERTASI - EE186601}
+%\Kode{TESIS - EE184401}
+%\Kode{Proposal Tesis}
+\Kode{Thesis Proposal}
+%\Kode{Proposal Disertasi}
+%*******************************
+
+%*******************************
+%  3. Judul Proposal, Tesis atau 
+%     Disertasi 
+%     dipilih Salah Satu 
+%-------------------------------
+% Tulislah Judul Dalam Bahasa Indonesia
+\Judul{AUTONOMOUS VEHICLE NAVIGATION SYSTEM USING MACHINE LEARNING AND GRAPH BASED SLAM}
+% Tulislah Judul Dalam Bahasa Inggris
+\JudulEng{AUTONOMOUS VEHICLE NAVIGATION SYSTEM USING MACHINE LEARNING AND GRAPH BASED SLAM}
+%***********************************
+% 4. Identitas Mahasiswa
+% Format :\Mahasiswa{Nama}{Nrp}
+%------------------------------------
+\Mahasiswa{Azzam Wildan Maulana}{6022241101}
+%************************************
+% 5. Waktu Dan Ruang Ujian
+%------------------------------------
+%Tanggal Ujian 
+\TanggalUjian{18 June 2025}
+% Perioda wisuda  
+%\PeriodeWisuda{September 2023} 
+%Hari ujian dan Tempat Ujian 
+\HariUjian{Wednesday}
+\TempatUjian{B211 Room}
+
+
+%************************************
+%6. Identitas Pembimbing 
+%   Maximal Tiga Pembimbing
+%   Format : \PembimbingXXX{Nama}{Nip}
+%-----------------------------------
+%\scalebox{.95}[1.0]{xxx}
+\PembimbingSatu{Prof. Dr. Ir. Mauridhi Hery Purnomo, M.Eng.}{195809161986011001}
+\PembimbingDua{Ahmad Zaini, S.T., M.Sc.}{197504192002121003}
+\PembimbingTiga{Dr. Rudy Dikairono, S.T., M.T.}{198103252005011002}
+
+%************************************
+% 7. Identitas Penguji 
+%     Maximal 4 penguji
+%     Format : \PengujiXXX{Nama}{Nip}
+%-------------------------
+\PengujiSatu{Dr. Eko Mulyanto Yuniarno,ST. MT.}{196806011995121009}
+\PengujiDua{Dr.Eko Mulyanto Yuniarno}{196806011995121009}
+\PengujiTiga{Dr.Eko Mulyanto Yuniarno}{196806011995121009}
+\PengujiEmpat{Dr.Eko Mulyanto Yuniarno}{132135221}
+% \PengujiTiga{-}{-}
+% \PengujiEmpat{-}{-}
+
+%************************************
+% 8. Identitas Fakultas ------------------------------------
+\Fakultas{Fakultas Teknologi Elektro Dan Informatika Cerdas}
+\BeltFakultas{BeltFte}
+%************************************
+% 9. Identitas Departement
+%-----------------------------------
+\Departemen{Teknik Elektro}
+
+\KaDep{Dedet Candra Riawan, ST., M.Eng., Ph.D}{197311192000031001}
+%***********************************
+% 10. Footer Identitas Program Studi 
+%  Pada Cover
+%----------------------------------
+\CoverFooter{\normalsize
+MASTER PROGRAM\\
+	DEPARTMENT OF ELECTRICAL ENGINEERING\\
+	FACULTY OF INTELLIGENT ELECTRICAL AND\\
+	INFORMATICS TECHNOLOGY\\
+	INSTITUT TEKNOLOGI SEPULUH NOPEMBER\\
+	SURABAYA\\
+	2025}
+
+%**********************************
+%File Penting Yang Dapat di Edit:
+%**********************************
+%Abstrak :
+%        ->\ubah\abstrak.tex
+%Abstrak Bhs Inggris :
+%        ->\ubah\abstrakEng.tex
+%Kata Penggantar :
+%        ->\ubah\pengantar.tex 
+%Nomenklatur :
+%        ->\ubah\Nomenklatur.tex
+%Database Daftar Pustaka
+%        ->\ubah\pustaka.bib
+%DaftarRiwayatHidup 
+%        ->\ubah\DaftarRiwayatHidup.tex
+%----------------------------------
+%**********************************
+%Dokumen Utama
+%----------------------------------
+\begin{document}
+\input{./lib/TataLetak.tex}
+
+\begin{spacing}{1.5}
+	\input{./bab1/bab1}
+	\cleardoublepage
+	\input{./bab2/bab2}
+	\cleardoublepage
+	\input{./bab3/bab3}
+	\cleardoublepage
+	\input{./bab4/bab4}
+	\cleardoublepage
+	%\input{./bab5/bab5}
+	%\cleardoublepage
+	%Bab Lain bisa ditambah disini
+\end{spacing}
+\DaftarPustaka
+% Daftar Riwayat Hidup
+%    ->\ubah\DaftarRiwayatHidup.tex
+\DaftarRiwayatHidup
+\end{document}
