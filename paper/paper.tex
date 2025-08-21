@@ -29,8 +29,10 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{AUTONOMOUS VEHICLE NAVIGATION SYSTEM USING MACHINE LEARNING AND GRAPH BASED SLAM
-}
+
+% \title{AUTONOMOUS VEHICLE NAVIGATION SYSTEM USING MACHINE LEARNING AND GRAPH BASED SLAM
+% }
+\title{AUTONOMOUS VEHICLE NAVIGATION FOR HEAVY INDUSTRIAL TRANSPORT WITH HIGH ACCURACY AND PRECISION POSE USING GRAPH-BASED SLAM AND REAL-TIME MACHINE LEARNING}
 
 \author{\IEEEauthorblockN{Azzam Wildan Maulana}
 \IEEEauthorblockA{\textit{Departemen of Electrical Engineering} \\
@@ -90,19 +92,9 @@ For the low power and low latency of lane detection, we modify the Fast-SCNN mod
 % =========================================================================================================
 
 \section{Methodology}
-The methodology of this research is divided into four parts. First part is the hardware design and how we access the Towing, the second part is the navigation system using graph-based SLAM, the third part is the lane detection using machine learning, and the last part is the integration of the navigation system and safety system. 
+The methodology of this research is divided into four parts. First part is the pose estimation using graph-based SLAM, the third part is the lane detection using machine learning, and the last part is the integration of the navigation system and safety system. 
 
-\subsection{Hardware Design} 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{../konten/ist_hw.png}
-	\caption{Hardware design of the autonomous Towing.}
-	\label{fig:hw_design}
-\end{figure} 
-
-From the figure \ref{fig:hw_design}, we can see that the hardware design of the autonomous Towing is divided into two main communication (CAN bus and Ethernet). The CAN bus used to get Towing data such as encoder speed, battery, IMU, and transmission. Another function of CAN bus is to control the Steering of the Towing by using the custom EPS (Eletronic Power Steering). In the other way, the ethernet communication is to get sensor data from camera and lidars. The ethernet (using EtherCAT) used to get control of the Towing through the PLC that connected directly to the Towing. The choosen of the CAN bus and Ethernet is because the robustness of the communication especially in the harsh environment. 
-
-\subsection{Navigation System using Graph-Based SLAM}
+\subsection{Pose Estimation using Graph-Based SLAM}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{../konten/nav_map2.png}
@@ -148,21 +140,21 @@ The third step is Nodes processing, which is the process of creating a node from
 \end{itemize}
 
 \par    
-Next step is ORB + RANSAC process, while the Towing has moved to map the area, the ORB process will find the matched keypoint from current synchronized camera data to all the saved node. After ORB found some matched keypoint, the next process is RANSAC filter. The RANSAC filter will filter the matched keypoint geometrically. The output of RANSAC filter is the inliers between two image. If the inliers is more than the mininimum thershold, the loop closure hypothesis will be added. Below is the result example of ORB + RANSAC. 
+Next step is ORB + RANSAC process, while the Towing has moved to map the area, the ORB process will find the matched keypoint from current synchronized camera data to all the saved node. After ORB found some matched keypoint, the next process is RANSAC filter. The RANSAC filter will filter the matched keypoint geometrically \cite{ref_orb_ransac}. The output of RANSAC filter is the inliers between two image. If the inliers is more than the mininimum thershold, the loop closure hypothesis will be added. Below is the result example of ORB + RANSAC. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{../konten/orb_ransac.png}
+	\includegraphics[width=\linewidth]{../konten/orb_ransac2.png}
 	\caption{Result of ORB + RANSAC}
 	\label{fig:orb_ransac}
 \end{figure}
-The figure \ref{fig:orb_ransac} shows the result of ORB + RANSAC process. The left image is the current synchronized camera data, and the right image is the saved node. The cyan lines are the matched keypoint between two images. The magenta points are the features detected by GFTT (Good Features to Track) algorithm.
+The figure \ref{fig:orb_ransac} shows the result of ORB + RANSAC process. The left image is the current synchronized camera data, and the right image is the saved node. The cyan lines are the matched keypoint between two images. The red points are the features detected by GFTT (Good Features to Track) algorithm \cite{ref_gftt}.
 \par   
 After loop closure hypothesis is added, the next step is to optimize the graph. The optimization process will use GTSAM library \cite{ref_gtsam} to optimize the graph. The optimization process will use the ICP as the constraint between the nodes. All the nodes link constraint calculated using ICP from the lidar laser scan. If the iterations for optimizing has reached the maximum iterations, the optimization process will stop and the minimum error will be noted. If the minimum error is below the threshold, the loop closure will be accepted and the graph will be updated. The optimized pose will be calculated for every node and updated for all nodes in the graph. The optimized pose will be used for the next localization process. Below is the example of the map that has been built with and without loop closure found. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{../konten/map_salah.png}
-	\caption{Map of the area with and without loop closure found.}
+	\caption{Map of the area without loop closure found.}
 	\label{fig:map}
 \end{figure}
 
@@ -279,7 +271,7 @@ Where $\alpha$ is the low pass filter coefficient (currently we use 0.055), $v_{
 The last step is to combine it, The target velocity speed from equation \ref{eq:bicycle_model_velocity} will be clipped with the final target speed from equation \ref{eq:low_pass_filter}. The target steering angle from equation \ref{eq:bicycle_model_full} will be used to control the steering of the vehicle. The final target velocity will be sent to the motor driver as a Volt signal and the final target steering angle will be sent to the EPS (Electronic Power Steering) using CAN bus.
 
 
-\section{Results} 
+\section{Results and Discussion} 
 There were several results that we got from this research. The first result is the cm level error (below 1 cm) in robot pose estimation. The second result is the fast lightweight and near accurate lane detection. The third result is the total time to transport the molten aluminum liquid from IST to CMWI. 
 
 \subsection{Robot Pose Estimation} 
@@ -318,6 +310,35 @@ Where the \textbf{Lap-} is the lap number, \textbf{X (m)} and \textbf{Y (m)} are
 Where the \textbf{Lap-} is the lap number, \textbf{X (m)} and \textbf{Y (m)} are the position of the Towing in meter after 500 meter moving, and \textbf{Error (m)} is the error of the pose estimation in meter. The error calculated using the ground truth zero condition (x = 0 and y = 0) The average error is 0.024 meters or 2.4 cm. This is excellent enough for autonomous navigation, so we can conclude that our architecture in graph based SLAM is working well.
 
 \subsection{Lane Detection}
+There are the result from the lane detection using machine learning. The result is shown in the figure \ref{fig:lane_detection_result}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{../konten/bnr_satu.png}
+	\caption{Lane Detection Result using Machine Learning}
+	\label{fig:lane_detection_result}
+\end{figure}
+The figure \ref{fig:lane_detection_result} shows the results of lane detection using machine learning. The image A is the condition where Towing at full straight lane, the output velocity is 2.2 meter per seconds. Image B is the condition where Towing is inside narrow straight lane, the output velocity is 1.76 meter per seconds. The image C is the condition where Towing in sharp turn and facing the fences, the output velocity only 0.70 meter per seconds. The image D is the condition where Towing going to turn left with narrow area, the output velocity is 1.59 meter per seconds. The image E is the condition where Towing cannot move because there is an obstacle in the front of Towing, the velocity is 0.00 meter per seconds. The last image F is where Towing goinf turn right with narrow area, the output velocity is 1.56 meter per seconds. 
+
+\par   
+Another result is the inference time for one frame of lane detection. The result is shown in the table \ref{tab:lane_detection_inference_time}. 
+\begin{table}[H]
+	\centering
+	\caption{Lane Detection Inference Time}
+	\label{tab:lane_detection_inference_time}
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Frame Number} & \textbf{Inference Time (ms)} \\ \hline
+		1 & 7.2 \\ \hline
+		2 & 7.7 \\ \hline
+		3 & 7.8 \\ \hline
+		4 & 7.7 \\ \hline
+		5 & 7.4 \\ \hline
+		6 & 8.0 \\ \hline
+		Averate & 7.63 \\ \hline
+	\end{tabular}
+\end{table}
+Table \ref{tab:lane_detection_inference_time} shows the inference time for lane detection using machine learning. The average inference time is 7.63 ms, which is fast enough to run on CPU with low power usage. This is very important for autonomous navigation because the lane detection need to be fast and accurate to detect the lane and obstacles in real-time. That can be obtained by using onnx runtime that can run on CPU \cite{ref_onnx}. 
+
 \subsection{Total Time to Transport the Molten Aluminum Liquid}
 There is the result on total time to transport the molten aluminum liquid from IST to CMWI. The result is shown in the table \ref{tab:total_time_transport}.
 \begin{table}[H]
@@ -358,17 +379,20 @@ There is another result on total time to transport the molten aluminum liquid fr
 
 From table \ref{tab:total_time_transport} and \ref{tab:total_time_transport_manual}, we can see that the total time to transport the molten aluminum liquid from IST to CMWI using Autonomous Towing is 42.21 minutes for 6 laps with total 10.8 tons of molten aluminum liquid sent, while using Manual Towing is 28.20 minutes for 6 laps with total 6 tons of molten aluminum liquid sent. The Autonomous Towing has a longer time because it has to navigate autonomously and detect the lane and obstacles, while the Manual Towing is driven manually by the workers. If we calculate the average time per ton, the Autonomous Towing has 3.91 minutes per ton, while the Manual Towing has 4.70 minutes per ton. This shows that the Autonomous Towing is more efficient in terms of time per ton sent. The 1.8 Tons of molten aluminum liquid can be sent using Autonomous Towing because there will be high risk if the molten sent by manual Towing that drive by the workers.
 
-\section{Discussion}
-The discussion will be separated into three parts. The first part is the discussion about the architecture of the graph based SLAM. The second part is the discussion about the architecture of the lane detection using machine learning. The last part is the discussion about the integration of the navigation system and safety system. 
+% \section{Discussion}
+% The discussion will be separated into three parts. The first part is the discussion about the architecture of the graph based SLAM. The second part is the discussion about the architecture of the lane detection using machine learning. The last part is the discussion about the integration of the navigation system and safety system. 
 
-\subsection{Graph Based SLAM Architecture} 
-In our research, we trust more on our hardware odometry because the data from the table \ref{tab:pose_estimation} shows that the error is good enough to be the main odometry for graph based SLAM. We fused the odometry differentially with pose estimated from SLAM. Because of that, we can get realtime update for the final pose of robot in 50 hz control loop.
+% \subsection{Graph Based SLAM Architecture} 
+% In our research, we trust more on our hardware odometry because the data from the table \ref{tab:pose_estimation} shows that the error is good enough to be the main odometry for graph based SLAM. We fused the odometry differentially with pose estimated from SLAM. Because of that, we can get realtime update for the final pose of robot in 50 hz control loop.
 
-\subsection{Lane Detection Architecture}
-The main idea the lane detection is to detect that the Towing is facing the right way or not. Just like a human while driving the car, if there a turn or something terrible in the front of the car like a broken lane or something that block the driver vision, the driver of the car will be slow down the speed of the car. The main reason why the driver slowing down the car is there not enough confidence for the driver to drive the car at high speed. Because of that simple idea, we decide to make the architecture very simple to make the power usage still low. Another reason why we built the architecture very simple is the Autonomous Towing will be always run on same lane so the dataset will be absolute. 
+% \subsection{Lane Detection Architecture}
+% The main idea the lane detection is to detect that the Towing is facing the right way or not. Just like a human while driving the car, if there a turn or something terrible in the front of the car like a broken lane or something that block the driver vision, the driver of the car will be slow down the speed of the car. The main reason why the driver slowing down the car is there not enough confidence for the driver to drive the car at high speed. Because of that simple idea, we decide to make the architecture very simple to make the power usage still low. Another reason why we built the architecture very simple is the Autonomous Towing will be always run on same lane so the dataset will be absolute. 
 
-\subsection{Integration of navigation system and safety system} 
-We have an excellent SLAM but we cannot 100\% trust on that because the system is zero fault tolerance. There's the reason why we built another system because if the SLAM fail there still be safety lane detection system that pulls down the velocity to zero to stop the Autonomous Towing. 
+% \par    
+% The high speed of the lane detection can be achieved by using an onnx runtime that can run on CPU. We used the pytorch library to train the model and then convert it to onnx format. The onnx runtime can run on CPU with low power usage and low latency. The average inference time based on table \ref{tab:lane_detection_inference_time} is 7.63 ms, which is fast enough for real-time applications. 
+
+% \subsection{Integration of navigation system and safety system} 
+% We have an excellent SLAM but we cannot 100\% trust on that because the system is zero fault tolerance. There's the reason why we built another system because if the SLAM fail there still be safety lane detection system that pulls down the velocity to zero to stop the Autonomous Towing. 
 
 \section{Conclusion} 
 In this research, we have successfully implemented a full autonomous system on the Towing to transport the molten aluminum liquid from IST to CMWI. The system is robust and can handle the harsh environment in IST. The system can also navigate autonomously using the graph-based SLAM and lane detection using machine learning. The system can also detect the lane and obstacles, and can navigate autonomously to the destination. The result of this research is a cm level error (below 1 cm) in robot pose estimation and a lightweight machine learning model that can run only on CPU with below 10 ms inference time. 
