@@ -1,0 +1,95 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%Template version as of 6/27/2024
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\usepackage{float} 
+\usepackage{placeins}
+
+\usepackage{colortbl}  % Required for \rowcolor
+\usepackage{xcolor}    % Provides additional color definitions
+
+% Digunakan untuk menampilkan pustaka.
+\usepackage[square,comma,numbers,sort&compress]{natbib}
+
+% Mengubah format ukuran teks pada natbib.
+\renewcommand{\bibfont}{\normalfont\footnotesize}
+
+% Digunakan untuk menyeimbangkan bagian akhir dokumen dengan dua kolom.
+\usepackage{balance}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{AUTONOMOUS VEHICLE NAVIGATION SYSTEM USING MACHINE LEARNING AND GRAPH BASED SLAM
+}
+
+\author{\IEEEauthorblockN{Azzam Wildan Maulana}
+\IEEEauthorblockA{\textit{Departemen of Electrical Engineering} \\
+\textit{Faculty of Intelligent Electrical and Informatics Technolog} \\
+\textit{Sepuluh Nopember Institute of Technology}\\
+Surabaya, Indonesia \\
+azzamwildan462@gmail.com}
+\and
+
+\IEEEauthorblockN{Rudy Dikairono}
+\IEEEauthorblockA{Department of Electrical Engineering\\
+Faculty of Intelligent Electrical and Informatics Technology\\
+Institut Teknologi Sepuluh Nopember\\
+Surabaya, Indonesia 60111\\
+rudydikairono@its.ac.id}
+\and
+
+\IEEEauthorblockN{Ahmad Zaini}
+\IEEEauthorblockA{Department of Computer Engineering\\
+Faculty of Intelligent Electrical and Informatics Technology\\
+Institut Teknologi Sepuluh Nopember\\
+Surabaya, Indonesia 60111\\
+zaini@its.ac.id}
+\and
+
+\IEEEauthorblockN{Mauridhi Hery Purnomo}
+\IEEEauthorblockA{\textit{Departemen of Computer Engineering} \\
+\textit{Faculty of Intelligent Electrical and Informatics Technolog} \\
+\textit{Sepuluh Nopember Institute of Technology}\\
+Surabaya, Indonesia \\
+hery@ee.its.ac.id}
+\and
+}
+
+\maketitle
+
+\begin{abstract}
+	Indonesia Smelting Technology (IST) is an industry below Toyota Tsusho Corp that focuses on producing aluminum liquid. The melted aluminum liquid will be used by CMWI (Central Motor Wheel Indonesia) to make the wheel rims. IST has a vision to become a smart factory that utilizes the latest technology in its operations. One of the technologies that can be implemented is autonomous vehicles, which can transport a dangereous aluminum liquid (molten) from IST to CMW. The total weight of the molten aluminum liquid is around 1.8 tons, and the total weight that the vehicle need to carry is 4.8 tons. Previously, IST has used a small train with a rail to transport the molten aluminum liquid, but this method has several limitations, such as the need for a rail infrastructure that very expensive and the limited flexibility of the vehicle. So, IST wants to implement an autonomous vehicle that can transport the molten aluminum liquid without the need for a rail infrastructure. The autonomous vehicle will be equipped with a navigation system that can detect the lane and obstacles, and can navigate autonomously to the destination. The navigation system will use a combination of machine learning and graph-based SLAM (Simultaneous Localization and Mapping) to achieve this goal. The machine learning algorithm will be used to detect the lane and obstacles, while the graph-based SLAM will be used to estimate the pose of the vehicle and create a map of the environment. The result of this research is a cm level error (below 1 cm) in robot pose estimation and a lightweight machine learning model that can run only on CPU with below 10 ms inference time.
+
+\begin{IEEEkeywords}
+	autonomous vehicle, navigation system, machine learning, graph-based SLAM, lane detection
+\end{IEEEkeywords}
+\end{abstract}
+
+\section{Background}
+Indonesia Smelting Technology (IST) is an industry below Toyota Tsusho Corp that focuses on producing aluminum liquid. The environment in IST is very dangereous because of the molten aluminum liquid that has a temperature of around 700 degrees Celsius. The production goes in 24 hours a day. The production team divided into four shifts.
+
+% =========================================================================================================
+
+\section{Literature Review}
+There are several studies to dive deeper into the topic of autonomous vehicle navigation systems. These studies focus on various aspects, including pose estimation, road detection, and SLAM implementation.
+
+
+% Menamcement of realsensepilkan daftar pustaka dengan format IEEE
+\bibliographystyle{IEEEtranN}
+\bibliography{../ubah/pustaka.bib}
+
+% Menyeimbangkan bagian akhir di kedua kolom
+% \balance
+
+
+\end{document}
