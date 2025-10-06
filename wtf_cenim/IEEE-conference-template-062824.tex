@@ -1,4 +1,4 @@
-\documentclass[conference]{IEEEtran}
+\documentclass[conference, a4paper]{IEEEtran}[2015/08/26]
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 %Template version as of 6/27/2024
@@ -37,34 +37,36 @@
 \title{Autonomous Vehicle Navigation for Heavy Industrial Transport with High Accuracy and Precision Pose using Graph-Based SLAM and Real-Time Machine Learning}
 
 \author{\IEEEauthorblockN{Azzam Wildan Maulana}
-\IEEEauthorblockA{\textit{Departemen of Electrical Engineering} \\
+\IEEEauthorblockA{\textit{Department of Electrical Engineering} \\
 % \textit{Faculty of Intelligent Electrical and Informatics Technolog} \\
-\textit{Sepuluh Nopember Institute of Technology}\\
-Surabaya, Indonesia \\
-azzamwildan462@gmail.com}
+Institut Teknologi Sepuluh Nopember\\
+Surabaya, Indonesia 60111 \\
+6022241101@student.its.ac.id}
 \and
 
 \IEEEauthorblockN{Rudy Dikairono}
-\IEEEauthorblockA{Department of Electrical Engineering\\
+\IEEEauthorblockA{\textit{Department of Electrical Engineering}\\
 % Faculty of Intelligent Electrical and Informatics Technology\\
 Institut Teknologi Sepuluh Nopember\\
-Surabaya, Indonesia 60111\\
+Surabaya, Indonesia 60111 \\
 rudydikairono@its.ac.id}
 \and
 
 \IEEEauthorblockN{Ahmad Zaini}
-\IEEEauthorblockA{Department of Computer Engineering\\
+\IEEEauthorblockA{\textit{Department of Electrical Engineering}\\
+\textit{Department of Computer Engineering}\\
 % Faculty of Intelligent Electrical and Informatics Technology\\
 Institut Teknologi Sepuluh Nopember\\
-Surabaya, Indonesia 60111\\
+Surabaya, Indonesia 60111 \\
 zaini@its.ac.id}
 \and
 
 \IEEEauthorblockN{Mauridhi Hery Purnomo}
-\IEEEauthorblockA{\textit{Departemen of Computer Engineering} \\
+\IEEEauthorblockA{\textit{Department of Electrical Engineering} \\
+\textit{Department of Computer Engineering}\\
 % \textit{Faculty of Intelligent Electrical and Informatics Technolog} \\
-\textit{Sepuluh Nopember Institute of Technology}\\
-Surabaya, Indonesia \\
+Institut Teknologi Sepuluh Nopember\\
+Surabaya, Indonesia 60111 \\
 hery@ee.its.ac.id}
 \and
 }
@@ -76,7 +78,7 @@ hery@ee.its.ac.id}
 % \end{abstract}
 
 \begin{abstract}
-	The research is convert the manual Towing to fully autonomous Towing for transport molten aluminum liquid in IST (Indonesia Smelting Technology). The Autonomous Towing will be equipped with a navigation system that can detect the lane, and can navigate autonomously to the destination. The navigation system will use a combination of machine learning and graph-based SLAM (Simultaneous Localization and Mapping) to achieve this goal. The machine learning algorithm will be used to detect the lane using segmentation technique, while the graph-based SLAM will be used to estimate the pose of the Towing and create a map of the environment. The result of this research is a cm level error (below 1 cm) in robot pose estimation and a lightweight machine learning model that can run only on CPU with below 10 ms inference time.
+	The research is convert the manual Towing to fully autonomous Towing for transport molten aluminum liquid in IST (Indonesia Smelting Technology). The Autonomous Towing will be equipped with a navigation system that can detect the lane, and can navigate autonomously to the destination. The navigation system will use a combination of machine learning and graph-based SLAM (Simultaneous Localization and Mapping) to achieve this goal. The machine learning algorithm will be used to detect the lane using segmentation technique, while the graph-based SLAM will be used to estimate the pose of the Towing and create a map of the environment. The result of this research is a cm level error (below 5 cm) in robot pose estimation and a lightweight machine learning model that can run only on CPU with below 10 ms inference time.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -270,7 +272,7 @@ The last step is to combine it, The target velocity speed from equation \ref{eq:
 
 
 \section{Results and Discussion} 
-There were several results that we got from this research. The first result is the cm level error (below 1 cm) in robot pose estimation. The second result is the fast lightweight and near accurate lane detection. The third result is the total time to transport the molten aluminum liquid from IST to CMWI. 
+There were several results that we got from this research. The first result is the cm level error (below 5 cm) in robot pose estimation. The second result is the fast lightweight and near accurate lane detection. The third result is the total time to transport the molten aluminum liquid from IST to CMWI. 
 
 \subsection{Robot Pose Estimation} 
 There is the result on pose estimation without SLAM. The result is comparing the odometry before and after 500 meters long path. The result is shown in the table \ref{tab:pose_estimation}.
@@ -396,7 +398,7 @@ From table \ref{tab:total_time_transport} and \ref{tab:total_time_transport_manu
 In the future, we plan to improve Graph Based SLAM system with shared memory for multi robot system. The database of the graph will be shared between robots so the all robot will have the same map of the environment. For offline processing, we can simply doing rsync to synchronize the database from one robot to another robot. So the all robot will use the same map of the environment. But for the online processing, we cannot use that because the database and map still being updated. To combine multi map from multi robot, we must have a transform for all maps. So for the online processing, we need a centralized system that can handle all of it. The challenge is how to make the centralized system can handle the large scale environment and can run realtime or semi-realtime. Another challenge is the communication between robots and centralized system. We need to make sure that the communication is reliable and can handle the large scale environment.
 
 \section{Conclusion} 
-In this research, we have successfully implemented a full autonomous system on the Towing to transport the molten aluminum liquid from IST to CMWI. The system is robust and can handle the harsh environment in IST. The system can also navigate autonomously using the graph-based SLAM and lane detection using machine learning. The system can also detect the lane and obstacles, and can navigate autonomously to the destination. The result of this research is a cm level error (below 1 cm) in robot pose estimation and a lightweight machine learning model that can run only on CPU with below 10 ms inference time. 
+In this research, we have successfully implemented a full autonomous system on the Towing to transport the molten aluminum liquid from IST to CMWI. The system is robust and can handle the harsh environment in IST. The system can also navigate autonomously using the graph-based SLAM and lane detection using machine learning. The system can also detect the lane and obstacles, and can navigate autonomously to the destination. The result of this research is a cm level error (below 5 cm) in robot pose estimation and a lightweight machine learning model that can run only on CPU with below 10 ms inference time. 
 
 
 \section{Acknowledgment}
