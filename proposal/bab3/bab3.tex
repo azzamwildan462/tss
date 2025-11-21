@@ -22,7 +22,7 @@ Figure \ref{fig:full_system} illustrates the legacy Icar system, which relies on
 	\label{fig:full_system_slam}
 \end{figure}
 
-Figure \ref{fig:full_system_slam} illustrates the new proposed Icar system, which does not rely on GNSS. Instead, it uses a stereo depth camera and LIDAR for pose estimation. The system also employs a Pre-defined Trajectory to determine the target speed and steering angle using the Bicycle Model \cite{rajamani2011vehicle}, as shown in equation \ref{eq:bicycle_model_core}. The first step is finding the target waypoint angle using equation below.
+Figure \ref{fig:full_system_slam} illustrates the new proposed Icar system, which does not rely on GNSS. Instead, it uses a camera and LIDAR for pose estimation. The system also employs a Pre-defined Trajectory to determine the target speed and steering angle using the Bicycle Model \cite{rajamani2011vehicle}, as shown in equation \ref{eq:bicycle_model_core}. The first step is finding the target waypoint angle using equation below.
 \begin{equation}
 	\begin{aligned}
 	\theta_{\text{direction}} = \tan^{-1}\left(\frac{y_{\text{waypoint}} - y_{\text{position}}}{x_{\text{waypoint}} - x_{\text{position}}}\right) - \theta_{\text{orientation}}
@@ -47,7 +47,7 @@ Where $L$ is the distance between the front and rear wheels, and $D_{\text{looka
 \end{equation}
 Where $v_{\text{max}}$ is the maximum speed of the vehicle. The target speed $v_{\text{target}}$ is determined by the distance to the waypoint, ensuring it does not exceed the maximum speed.
 
-The primary difference between the two systems is the source of position and orientation data. The legacy system uses GNSS and odometry, while the new system uses stereo depth cameras, LIDAR, and odometry. Additionally, the new system integrates road detection to enhance navigation safety.
+The primary difference between the two systems is the source of position and orientation data. The legacy system uses GNSS and odometry, while the new system uses camera, LIDAR, and odometry. Additionally, the new system integrates road detection to enhance navigation safety.
 
 \section{Road Detection System}
 \begin{figure}[H]
@@ -60,14 +60,14 @@ The primary difference between the two systems is the source of position and ori
 From Figure \ref{fig:ml_system}, it is shown that the road detection system on Icar utilizes a machine learning architecture, specifically using Fast-SCNN \cite{ref_fast_scnn} as the core model. Its architecture differs in the convolution channels and pooling methods. The smaller convolution channels and the use of average pooling instead of pyramid pooling are intended to reduce computational load, making it suitable for real-time applications on Icar.
 
 \subsection{Downsampling} 
-Figure \ref{fig:ml_capture} shows the raw image captured by the stereo depth camera. The image is then processed through a series of convolution layers to downsample it.
+Figure \ref{fig:ml_capture} shows the raw image captured by the camera. The image is then processed through a series of convolution layers to downsample it.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{../konten/asli.png}
 	\caption{Raw Image}
 	\label{fig:ml_capture}
 \end{figure} 
-In this step, the image captured by the stereo depth camera, originally a 3-channel image, is converted to 16 channels. This is achieved via three successive 3x3 convolution layers with a stride of 2: first converting 3→8 channels, then 8→16, and finally 16→32 channels. The resulting image is then split into two paths: one goes to global feature extraction, the other to feature fusion. 
+In this step, the image captured by the camera, originally a 3-channel image, is converted to 16 channels. This is achieved via three successive 3x3 convolution layers with a stride of 2: first converting 3→8 channels, then 8→16, and finally 16→32 channels. The resulting image is then split into two paths: one goes to global feature extraction, the other to feature fusion. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{../konten/ds_b3.png}
@@ -120,10 +120,10 @@ Figure \ref{fig:ml_cls0} shows the result of the classification stage, where the
 From Figure \ref{fig:slam_system}, the pose correction system consists of four main processes: data synchronization, nodes processing, graph optimization, and pose fusion.
 
 \subsection{Data Synchronization} 
-This initial step synchronizes data from the stereo depth camera and odometry based on timestamps to ensure aligned data for further processing. The technique that used is the approximate time synchronization. Approximate time synchronization assume that the error timestamp below threshold like 10 milliseconds is eligible to be synchronized. 
+This initial step synchronizes data from the camera, LIDAR, and odometry based on timestamps to ensure aligned data for further processing. The technique that used is the approximate time synchronization. Approximate time synchronization assume that the error timestamp below threshold like 10 milliseconds is eligible to be synchronized. 
 
 \subsection{Nodes Processing}
-This initiates the graph optimization process. Nodes represent vehicle poses and keypoints from stereo depth camera and LIDAR. There are two modes in this process, the first mode is mapping mode. In mapping mode, the system creates new nodes for each pose, keypoint detected by the stereo depth camera and LIDAR laser scan while the robot has moved 1 meter away from the last node created. The second mode is localization mode, where existing nodes are used without adding new ones. This mode is used when the vehicle is already in a known area, and it needs to localize itself within that area without creating new nodes. Mapping mode only used once, while localization mode is used every time the vehicle is moving after finished mapping mode.
+This initiates the graph optimization process. Nodes represent vehicle poses and keypoints from camera and LIDAR. There are two modes in this process, the first mode is mapping mode. In mapping mode, the system creates new nodes for each pose, keypoint detected by the camera and LIDAR laser scan while the robot has moved 1 meter away from the last node created. The second mode is localization mode, where existing nodes are used without adding new ones. This mode is used when the vehicle is already in a known area, and it needs to localize itself within that area without creating new nodes. Mapping mode only used once, while localization mode is used every time the vehicle is moving after finished mapping mode.
 
 \subsection{Graph Optimization} 
 The first step is finding the loop closure by using BRISK algorithm \cite{ref_brisk}. BRISK will doing image matching between the current image and the previous saved image for each node. If the image matches, it will be considered as loop closure hypothesis. Then by using GTSAM \cite{ref_gtsam}, the optimization error will be calculated for all nodes by doing ICP \cite{ref_icp} from the saved LIDAR laser scan for each node. If the optimization error less than the threshold (3.0), the loop closure will be accepted, and the graph will be optimized. The optimization process uses a factor graph approach, where each node represents a pose and each edge represents a constraint between poses. The optimization minimizes the error in pose estimation by adjusting the poses based on the constraints.
