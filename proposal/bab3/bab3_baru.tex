@@ -1,4 +1,4 @@
-\chapter{METHODOLOGY}
+\chapter{FULL SYSTEM OVERVIEW}
 \label{sec:chap3_metodologi}
 
 \input{bab3/bab3_baru_definition}
@@ -8,6 +8,9 @@
 \OverviewofthePreviousIcarSystem
 \section{Overview of the Proposed System}
 \OverviewoftheProposedSystem
+
+\chapter{LOW LEVEL SYSTEM}
+\label{sec:chap3_metodologi2}
 
 \section{Electrical System}
 \ElectricalSystem
@@ -27,12 +30,16 @@
 \LowLevelProgramArchitecture
 \subsection{Sensor Data Acquisition}
 \SensorDataAcquisition
-\subsection{Sensor Calibration}
-\SensorCalibration
-\subsection{Frame Transformation}
-\FrameTransformation
 \subsection{Odometry Calculation}
 \OdometryCalculation
+\subsection{Frame Transformation}
+\FrameTransformation
+
+\chapter{MIDDLEWARE SYSTEM}
+\label{sec:chap3_metodologi3}
+
+\section{Middleware System}
+\MiddlewareSystem
 
 \section{Depth Image Creation}
 \DepthImageCreation
@@ -41,25 +48,10 @@
 \subsection{Post Filter for Depth Image}
 \PostFilterForDepthImage
 
-\section{Graph Based SLAM}
-\GraphBasedSLAM
-\subsection{Graph Based SLAM Mode}
-\GraphBasedSLAMMode
-\subsection{Sensor Fusion}
-\SensorFusion
-\subsection{Nodes Processing}
-\NodesProcessing
-\subsection{Loop Closure Detection}
-\LoopClosureDetection
-\subsection{Graph Optimization}
-\GraphOptimization
-\subsection{Pose Fusion}
-\PoseFusion
-
 \section{Machine Learning}
 \MachineLearning
-\subsection{Infrastructure Setup}
-\InfrastructureSetup
+% \subsection{Infrastructure Setup}
+% \InfrastructureSetup
 \subsection{Architecture Design}
 \ArchitectureDesign
 \subsection{Dataset Preparation}
@@ -72,6 +64,24 @@
 \PostProcessing
 \subsection{Final Transformation}
 \FinalTransformation
+
+\section{Graph Based SLAM}
+\GraphBasedSLAM
+\subsection{Graph Based SLAM Mode}
+\GraphBasedSLAMMode
+\subsection{Synchronization}
+\SensorFusion
+\subsection{Nodes Processing}
+\NodesProcessing
+\subsection{Loop Closure Detection}
+\LoopClosureDetection
+\subsection{Graph Optimization}
+\GraphOptimization
+\subsection{Pose Fusion}
+\PoseFusion
+
+\chapter{HIGH LEVEL SYSTEM}
+\label{sec:chap3_metodologi4}
 
 \section{High Level Program Architecture}
 \HighLevelProgramArchitecture
