@@ -1,11 +1,22 @@
 \newcommand{\OverviewofthePreviousIcarSystem}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{../konten/full_sys1.png}
+        \caption{Block Diagram of the Previous Icar System with GNSS}
+        \label{fig:full_system}
+    \end{figure}
+    Figure \ref{fig:full_system} illustrates the previous Icar system, which fully rely on GNSS and odometry for pose estimation. The system uses a Pre-defined Trajectory to determine the target speed and steering angle using the Bicycle Model
 }
 
 \newcommand{\OverviewoftheProposedSystem}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{../konten/full_sysmy.png}
+        \caption{Block Diagram of the Proposed Icar System}
+        \label{fig:full_system_slam}
+    \end{figure}
+
+    Figure \ref{fig:full_system_slam} illustrates the proposed Icar system, which integrates Graph Based SLAM for pose estimation. The system utilizes Sensor Fusion from LIDAR, Camera, GPS, and Wheel Velocity Sensor to enhance the accuracy and reliability of the vehicle's navigation capabilities.
 }
 
 \newcommand{\ElectricalSystem}{
@@ -90,7 +101,7 @@
 \newcommand{\MiddlewareSystem}{
     \begin{figure}[H] 
         \centering
-        \includegraphics[width=\linewidth]{../konten/middleware_fix_coy.png}
+        \includegraphics[width=\linewidth]{../konten/middleware_fix_jir_woilah.png}
         \caption{Block Diagram of Middleware System}
         \label{fig:middleware_system}
     \end{figure}
@@ -210,46 +221,107 @@
 }
 
 \newcommand{\HighLevelProgramArchitecture}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/high_level_kurang_enter_wtf.png}
+        \caption{Block Diagram of High Level Architecture}
+        \label{fig:high_level_arc}
+    \end{figure}
+
+    Based on Figure \ref{fig:high_level_arc}, the High Level Program Architecture utilizes ROS2 as the framework for all processes. There are three main parts of High Level Architecture, which are Global Navigation Estimation, Local Navigation Estimation, and Safety System. 
 }
 
-\newcommand{\GraphBasedSLAMandMachineLearningIntegration}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\newcommand{\GlobalNavigationEstimation}{
+    The Global Navigation System is responsible for integrate with global trajectory from 3rd party application such as Google Maps or Waze. The 3rd party application will provide a global waypoints to system in latitude and longitude format. By using the final pose estimation from Graph Based SLAM as the starting point, the global waypoints will be converted to local waypoints in base link frame. The local waypoints will be used by Local Navigation Estimation to plan the trajectory and control the vehicle.
+}
+\newcommand{\LocalNavigationEstimation}{
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/wow_local.png}
+        \caption{Block Diagram of Local Navigation System}
+        \label{fig:local_nav}
+    \end{figure}
+
+    Figure \ref{fig:local_nav} shows the internal explanation of Local Navigation block in figure \ref{fig:high_level_arc}. The Local Navigation System divided into three main parts, which are Trajectory Planning, Trajectory Optimization, and Target Velocity and Steering Calculation.
+}
+
+\newcommand{\PathPlanning}{
+    The most important part of Local Navigation System is Trajectory Planning. The Trajectory Planning is responsible for planning a safe and optimal trajectory from the current vehicle pose to the next local waypoint provided by Global Navigation Estimation. The Trajectory Planning uses the final pose estimation from Graph Based SLAM as the starting point and the local waypoints as the goal points. The planned trajectory will be used by Trajectory Optimization to optimize the trajectory for smoothness and feasibility. 
+    \par    
+    The strategy used for Trajectory Planning is the Hybrid A* algorithm \cite{ref_smac_hybrid}. Hybrid A* was chosen because it operates in a continuous state space, evaluating transitions in $(x, y, \theta)$ rather than discrete grid cells. This allows the planner to generate kinematically feasible paths that follow the non-holonomic constraints of an Ackermann steering vehicle. Unlike classical grid-based A*, which expands nodes only on a discrete 2D grid without considering vehicle orientation or turning radius. The output of the Trajectory Planning is a series of waypoints that represent the planned trajectory from the current vehicle pose to the next local waypoint.
 }
 
 \newcommand{\ModelPredictionControl}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    adasdasdasd
 }
 
 \newcommand{\TrajectoryOptimization}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Once the local trajectory has been planned, the next step is Trajectory Optimization. The Trajectory Optimization is responsible for optimizing the planned trajectory for smoothness and feasibility. The main idea of Trajectory Optimization is to blend the local trajectory at time t with time t-1 and time t-2. The main benefit of blending trajectory over time are to reduce sudden changes in trajectory that can lead to uncomfortable ride, reduce the risk of jitter pose estimation, reduce the risk of sensor noise, and improve the overall stability of the vehicle control.  
+    \par    
+    The main idea of blending trajectory is doing $\alpha$-$\beta$-$\gamma$ filter for each trajectory by the time. The first step is to finding the neares point from current trajectory points to t-1 trajectory and t-2 trajectory. After that, we can do a weighted average for each point in current trajectory with the nearest point from t-1 trajectory and t-2 trajectory. 
+
+    \begin{equation}
+        \begin{aligned}
+            T^{\text{opt}}_{t} 
+            &= \alpha\, T_{t} 
+            + \beta\, T_{t-1} 
+            + \gamma\, T_{t-2}
+        \end{aligned}
+        \label{eq:trajectory_blending}
+    \end{equation}
+
+    Equation \ref{eq:trajectory_blending} which inspired from \cite{ref_kalman_filter_net} shows the standard weighted filter for $\alpha$-$\beta$-$\gamma$. The \(T^{\text{opt}}_{t}\) is the optimized trajectory at time t, \(T_{t}\) is the planned trajectory at time t, \(T_{t-1}\) is the planned trajectory at time t-1, and \(T_{t-2}\) is the planned trajectory at time t-2. The \(\alpha\), \(\beta\), and \(\gamma\) are the weight factors for each trajectory, where \(\alpha + \beta + \gamma = 1\). In our implementation, we set \(\alpha = 0.6\), \(\beta = 0.3\), and \(\gamma = 0.1\) to give more weight to the current trajectory while still considering the previous trajectories for smoothness. The output of Trajectory Optimization is an optimized trajectory that will be used by Target Velocity and Steering Calculation to calculate the target velocity and steering angle for the vehicle.
 }
 
 \newcommand{\TargetVelocityandSteeringCalculation}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    The final step of Local Navigation System is Target Velocity and Steering Calculation. The Target Velocity and Steering Calculation is responsible for calculating the target velocity and steering angle for the vehicle based on the optimized trajectory from Trajectory Optimization. The target velocity and steering angle are calculated using bicycle model kinematic. The first step is finding the angle to the next trajectory point based on lookahead distance. This can be done using equation \ref{eq:Tp_angle}. 
+
+    \begin{equation}
+        \begin{aligned}
+        \theta_{\text{direction}} = \tan^{-1}\left(\frac{y_{\text{Tp}} - y_{\text{position}}}{x_{\text{Tp}} - x_{\text{position}}}\right) - \theta_{\text{orientation}}
+        \label{eq:Tp_angle}
+        \end{aligned}
+    \end{equation}
+
+    Where \((x_{\text{Tp}}, y_{\text{Tp}})\) is the next trajectory point, \((x_{\text{position}}, y_{\text{position}})\) is the current vehicle position, and \(\theta_{\text{orientation}}\) is the current vehicle orientation. After that, we can calculate the target steering angle using bicycle model kinematic as shown in equation \ref{eq:bicycle_model_full}.
+
+    \begin{equation}
+        \begin{aligned}
+        \delta_{\text{target}} = \tan^{-1}\left( \frac{2 \cdot L \cdot \sin(\theta_{\text{direction}})}{D_{\text{lookahead}}} \right)
+        \label{eq:bicycle_model_full}
+        \end{aligned}
+    \end{equation}
+
+    Where \(\delta_{\text{target}}\) is the target steering angle, \(L\) is the wheelbase of the vehicle, and \(D_{\text{lookahead}}\) is the lookahead distance. The target velocity is calculated based on the curvature of the optimized trajectory and the maximum allowable lateral acceleration of the vehicle. The output of Target Velocity and Steering Calculation is the target velocity and steering angle that will be sent to the Safety System for execution.
 }
 
 \newcommand{\SafetySystem}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    The main idea of Safety System is to ensure that the vehicle run normally. The Safety System consists of two main parts, which are ISO Implementation and Emergency Stop System.
 }
 
 \newcommand{\ISOImplementation}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    There is standard ISO 26262 for Road autonomous vehicle functional safety. The ISO 26262 implementation is done to ensure that the vehicle operates safely and reliably in various driving conditions. There are list of condition and action that we have implemented based on ISO 26262 standard: 
+    \begin{itemize}
+        \item If the LIDAR sensor fails, the vehicle will stop immediately and wait for manual intervention.
+        \item If the camera sensor fails, the vehicle will stop immediately and wait for manual intervention.
+        \item If the GPS sensor fails, the vehicle will switch to odometry-based navigation and reduce speed to a safe level.
+        \item If the wheel velocity sensor fails, the vehicle will switch to GPS-based navigation and reduce speed to a safe level.
+        \item If the vehicle deviates from the planned trajectory by more than a predefined threshold, the vehicle will slow down and attempt to replan the trajectory.
+        \item If an obstacle is detected within a predefined distance from the vehicle, the vehicle will slow down or stop to avoid a collision.
+    \end{itemize}
 }
 
 \newcommand{\EmergencyStopSystem}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    The main idea of Emergency Stop System is to double check the target velocity and steering angle from Local Navigation Estimation before sending the command to the vehicle's actuation system. We use 3d point cloud LIDAR to do that. The simple tangent circle scan applied to filter is there are any obstacle in the way that target velocity and steering angle will go through. If there are any obstacle detected in the way, the Emergency Stop System will reduce the target velocity to 0 and keep the steering angle to the last safe steering angle. The output of Emergency Stop System is the final target velocity and steering angle that will be sent to the vehicle's actuation system.
 }
 
 \newcommand{\SafetyTests}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    The ablation study of Safety Tests is done to evaluate the performance of the Safety System in various driving conditions by remove or add some feature condition. The Safety Tests are conducted in a controlled environment with predefined scenarios that simulate real-world driving situations. There are several scenarios that we have tested:
+    \begin{itemize}
+        \item Cloudy weather condition with low visibility. 
+        \item Condition where the camera cannot see anything because of obstrcuted by another vehicles. 
+        \item Multipath detection of GPS. 
+        \item So many false negative road segmentation from Machine Learning.
+        \item Jitter pose estimation from Graph Based SLAM. 
+    \end{itemize}
 }
