@@ -1,5 +1,60 @@
+
+\newcommand{\LowLevelSystemSummary}{
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/omoda_sys.png}
+        \caption{Sensor Implementation on Icar}
+        \label{fig:sensor_implementation}
+    \end{figure}
+
+    Icar with new system was implemented by modifying the fully conventional vehicle. The modification includes adding a new set of sensors and managing the main CANbus. Figure \ref{fig:sensor_implementation} shows the sensor implementation on Icar. The sensors used in this system include 2x LIDAR, 1x LIDAR with IMU, GPS, 3x RGB Camera, and 1x global shutter camera. 
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/omoda_belakang.png}
+        \caption{Computing Hardware}
+        \label{fig:pc_omoda}
+    \end{figure}
+
+    Figure \ref{fig:pc_omoda} shows the hardware to do all the program and computation. The green circle is the power supply unit to supply power to the main computer and all the sensor based on \ref{fig:sensor_implementation}. The red circle is the main computer that installed inside the vehicle. 
+
+}
+
+\newcommand{\ImplementationofDepthImageCreation}{
+    Based on figure \ref{fig:middleware_system}, the first important step is Depth Image Creation. This step convert all LIDAR point cloud data to the single depth image based on camera intrinsic. Figure \ref{fig:depth_image} shows the result of depth image creation from LIDAR point cloud data.
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/depth.jpeg}
+        \caption{Result of Depth Image Creation}
+        \label{fig:depth_image}
+    \end{figure}
+
+    In the figure \ref{fig:depth_image}, the left image is the RGB image from the camera, and the right image is the depth image created from LIDAR point cloud data. The depth image painted on Jet colormap, where the closer the distance to the camera, the color will be more blue, and the farther the distance to the camera, the color will be more red.
+}
+
 \newcommand{\ImplementationofRoadSegmentation}{
-    der
+    Once we have trained our model using our training strategy on \ref{sec:model_training}, we can implement our model on to the vehicle. The first step is to load the model then inference the rgb image by that model. Figure \ref{fig:res_road_segmentation} shows the result of road segmentation from our model.
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/semua_canva.png}
+        \caption{Result of Road Segmentation}
+        \label{fig:res_road_segmentation}
+    \end{figure} 
+
+    In the figure \ref{fig:res_road_segmentation}, the sub image (a) is the RGB image from the camera, (b) is the raw road segmentation result from the model, (c) is the result of ROI cut process, (d) is the result of morphological operation process, (e) is the result of selecting the largest area, and (f) is the final road segmentation result after applying low pass temporal effect.  
+
+    The last sub image (f) in figure \ref{fig:res_road_segmentation} is the final road segmentation result that will be used on the next step, which is transforming the road segmentation to the base link frame by using depth image from \ref{fig:depth_image}. Figure \ref{fig:res_road_segmentation_trans} shows the result of road segmentation transformation to the base link frame.
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/ssvid_terpilih.png}
+        \caption{Result of Road Segmentation Transformation}
+        \label{fig:res_road_segmentation_trans}
+    \end{figure} 
+
+    In the figure \ref{fig:res_road_segmentation_trans}, the sub image (a) is the segmented road image and (b) is the road point cloud laser scan in the base link frame. In sub image (b), the cyan point is the road point cloud that obtained from the transformation process. 
 }
 
 \newcommand{\ImplementationofGraphBasedSLAM}{
@@ -10,41 +65,93 @@
     asdasd
 }
 
-
-
-\newcommand{\ResultofGPSOnlyvsGraphBasedSLAM}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-}
-
-\newcommand{\PoseEstimationAccuracy}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-}
-
-\newcommand{\PoseEstimationPrecision}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-}
-
 \newcommand{\ResultofRoadSegmentation}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+asd
 }
+
 
 \newcommand{\SegmentationAccuracy}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    The segmentation accuracy is measured by using Intersection over Union (IoU) metric. The IoU metric is calculated by dividing the intersection area between the predicted segmentation and the ground truth segmentation with the union area between the predicted segmentation and the ground truth segmentation. Table \ref{tab:iou_acc} shows the IoU segmentation accuracy result at different epoch during the training process.
+
+    \begin{table}[H]
+        \centering
+        \caption{IoU Segmentation Accuracy Result}
+        \label{tab:iou_acc}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Epoch} & \textbf{IoU} \\ \hline
+            100 & 0.7618 \\ \hline
+            150 & 0.8319 \\ \hline
+            200 & 0.8531 \\ \hline
+            300 & 0.8298 \\ \hline
+        \end{tabular}
+    \end{table}
+
+    Table \ref{tab:iou_acc} shows that the best IoU segmentation accuracy is achieved at epoch 200 with IoU value of 0.8531. This model will be used for the implementation on the vehicle. 
+    \par    
+
+    We think that the IoU calculation for accuracy measurement is sufficient enough because in real world application, there is a dimention called time. The IoU calculation for table \ref{tab:iou_acc} is calculated by selecting several random images that not included in the training dataset. But in real world application, the model will receive a continuous stream of images from the camera. So, we cannot trust only on the IoU calculation for several random images. We need to consider the temporal effect in real world application. The next section will discuss about the important of temporal effect in road segmentation application.
 }
 
 \newcommand{\TheImportantofTemporalEffect}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Like we discuss before, in real world application, the model will receive a continuous stream of images from the camera. So, we need to consider the temporal effect in real world application. The temporal effect that we imply in our model is using GRU (Gated Recurrent Unit) that will always save the global h state from the previous frame to the next frame. Figure \ref{fig:temporal_effect_gru} shows the comparison between with GRU temporal effect and without temporal effect in our road segmentation model.
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/arghh_canva.png}
+        \caption{With GRU Temporal Effect vs Without Temporal Effect}
+        \label{fig:temporal_effect_gru}
+    \end{figure} 
+
+    In the figure \ref{fig:temporal_effect_gru}, the sub image (a) is the result of raw road segmentation using GRU and sub image (b) is the result of raw road segmentation without using GRU. All that mask captured without being post processed so we can analyze the effect of GRU temporal effect only. From the figure \ref{fig:temporal_effect_gru}, we can see that there is a hole called False Positive in sub image (b) because it does not use GRU temporal effect. That False Positive hole can be dangerous in real world application because it can mislead the navigation system to think that the area is not drivable area. 
+
+    \par    
+    Sometimes, even though we have used GRU temporal effect, there is a chance that the False Positive hole still appear in the road segmentation. Figure \ref{fig:temporal_effect_gru2} shows another example of False Positive hole that appear even though we have used GRU temporal effect.
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/arghh_canva2.png}
+        \caption{Another With GRU Temporal Effect vs Without Temporal Effect}
+        \label{fig:temporal_effect_gru2}
+    \end{figure} 
+
+    Same as figure \ref{fig:temporal_effect_gru}, in the figure \ref{fig:temporal_effect_gru2}, the sub image (a) is the result of raw road segmentation using GRU and sub image (b) is the result of raw road segmentation without using GRU. All that mask captured without being post processed so we can analyze the effect of GRU temporal effect only. From the figure \ref{fig:temporal_effect_gru2}, we can see that there is a hole called False Positive in sub image (a) even though it smaller than the False Positive hole in sub image (b). To handle this case, we need to apply the post processing step to filter out the False Positive hole in the road segmentation result. The next section will discuss about the important of post processing in our road segmentation application.
 }
 
 \newcommand{\TheImportantofPostProcessing}{
-    asd asd asd asd asd asd asd asd    
-    lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Like we discuss before, we have a problem called False Positive hole that appear in the road segmentation result even though we have used GRU temporal effect. We think it was a flickering problem that sometime happen in real world application. To handle this problem, we found out to apply a low pass filter over time. The idea is calculate per pixel value in frame t by the effect of previous frame t-1. The equation is shown below:
+
+    \begin{equation}
+        S_t(x,y) = \alpha \cdot S_{t-1}(x,y) + (1 - \alpha) \cdot S_{t}(x,y)
+        \label{eq:lpf_temporal}
+    \end{equation}
+
+    where S is the segmentation mask, t is the current frame, t-1 is the previous frame, (x,y) is the pixel coordinate, and $\alpha$ is the low pass filter coefficient that we set to 0.7. After calculate pixel value, we divide it to binary value by thresholding it with 0.5 value. Figure \ref{fig:lpf_effect} shows the effect of post processing using low pass temporal filter.
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics[width=\linewidth]{../konten/lpfff.png}
+        \caption{Raw vs Low Pass Temporal Filtered Road Segmentation}
+        \label{fig:lpf_effect}
+    \end{figure} 
+
+    In the figure \ref{fig:lpf_effect}, the sub image (a) is the raw road segmentation result from the model, and (b) is the road segmentation result after applying low pass temporal filter. From the figure \ref{fig:lpf_effect}, we can see that the False Positive hole that appear in sub image (a) has gone in sub image (b) after applying low pass temporal filter. This post processing step is important to make the road segmentation result more stable and reliable for the navigation system. 
+
+    \par    
+    Not only used to temporally filter the road segmentation result, we also use several post processing step spatially to make the road segmentation result more accurate. The spatial post processing step that we use are ROI cut, morphological operation, and selecting the largest area. Figure \ref{fig:res_road_segmentation} shows the effect of spatial post processing step in our road segmentation application. The sub image (d) to (e) in figure \ref{fig:res_road_segmentation} shows the effect of morphological operation and selecting the largest area post processing step. From the figure \ref{fig:res_road_segmentation}, we can see that the spatial post processing step is important to remove the small unwanted segmented area that can mislead the navigation system. 
+}
+
+
+\newcommand{\ResultofGPSOnlyvsGraphBasedSLAM}{
+asd
+}
+
+\newcommand{\PoseEstimationAccuracy}{
+asd
+}
+
+\newcommand{\PoseEstimationPrecision}{
+asd
 }
 
 \newcommand{\PreviousNavigationSystemvsProposedNavigationSystem}{

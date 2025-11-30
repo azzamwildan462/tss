@@ -159,6 +159,7 @@
 }
 
 \newcommand{\ModelTraining}{
+    \label{sec:model_training}
     The model training process is carried out using the prepared dataset. The problem of our dataset is imbalanced data for example on figure \ref{fig:ml_dataset} in sub image b, there is a road bumb that have same color and pattern with road barrier but we want to predict that it's a road too. To handle that imbalanced data we use the Tversky loss function during training. The Tversky loss function can handle imbalanced data and bunch of false positive cases \cite{ref_tversky}. The important of the bunch of false positive cases is to avoid the vehicle from misdetecting the road area as non-road area, which can lead to unsafe driving conditions. 
     \par    
     Another technique that we use to improve the model performance is data augmentation. Data augmentation is done by applying various transformations to the input images, such as random gamma, random brightness, CLAHE, HSV limit, RGB shift, random shadow, random sunflare, ISO noise, Motion blurr, random tone curve, and random brightness contrast. These transformations help to increase the diversity of the training data and improve the model's ability to generalize to unseen data.  
@@ -173,7 +174,7 @@
 }
 
 \newcommand{\PostProcessing}{
-    There is an important step of Road Segmentation called Post Processing. There are step by step that we have done in post processing. The first step is CLAHE process, the CLAHE (Contrast Limited Adaptive Histogram Equalization) process is done to improve the contrast of the image. The seconds step is ROI crop that will erase all unused pixel that will not be the road. The third step is morphological operation, the morphological operation is done to remove small noise and fill small holes in the segmented image. The last step is depth image transformation, the depth image transformation is done to transform the segmented image from camera frame to base link frame using depth image from previous step. The fourth step is largest contour detection, the largest contour detection is done to find the largest road area in the segmented image. The fifth step is doing a low pass filter between time steps for every pixel to make the segmentation result more stable. 
+    There is an important step of Road Segmentation called Post Processing. There are step by step that we have done in post processing. The first step is ROI crop that will erase all unused pixel that will not be the road. The second step is morphological operation, the morphological operation is done to remove small noise and fill small holes in the segmented image. The third step is largest contour detection, the largest contour detection is done to find the largest road area in the segmented image. The fourth step is doing a low pass filter between time steps for every pixel to make the segmentation result more stable. 
 }
 
 \newcommand{\FinalTransformation}{
