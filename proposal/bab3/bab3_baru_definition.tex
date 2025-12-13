@@ -31,7 +31,7 @@
         \label{fig:e_sensor}
     \end{figure}
 
-    Based on Figure \ref{fig:e_sensor}, the Sensor System consists of several components, including LIDAR, Camera, GPS, and Wheel Velocity Sensor. The LIDAR sensors produces point cloud data and IMU data that interfaced with ethernet controller of computer. The Camera sensors produces image data that will be used for road segmentation, interfaced using USB controller of computer. The GPS sensor produces the estimation of latitude and longitude for car that interfaced using USB. The Wheel Velocity Sensor captured by sniffing car's main CAN bus using CANbus HAL module. 
+    Based on Figure \ref{fig:e_sensor}, the Sensor System consists of several components, including LIDAR, Camera, GPS, and Wheel Velocity Sensor. The LIDAR sensors produce point cloud data and IMU data that interfaced with ethernet controller of computer. The Camera sensors produce image data that will be used for Road Segmentation, interfaced using USB controller of computer. The GPS sensor produces the estimation of latitude and longitude for car that interfaced using USB. The Wheel Velocity Sensor captured by sniffing car's main CAN bus using CANbus HAL module. 
 }
 
 \newcommand{\ActuationSystem}{
@@ -111,7 +111,7 @@
 
 \newcommand{\DepthImageCreation}{
     \label{sec:depth_image_creation}
-    Base on Figure \ref{fig:middleware_system}, the Depth Image Creation block is responsible for creating a depth image from the LIDAR point cloud data and camera intrinsic data. This process involves two main steps: LIDAR Concatenation and Post Filter for Depth Image.
+    Based on Figure \ref{fig:middleware_system}, the Depth Image Creation block is responsible for creating a depth image from the LIDAR point cloud data and camera intrinsic data. This process involves two main steps: LIDAR Concatenation and Post Filter for Depth Image.
 }
 
 \newcommand{\LIDARConcatenation}{
@@ -142,7 +142,7 @@
         \label{fig:ml_arch}
     \end{figure}
 
-    Figure \ref{fig:ml_arch} visualize the architecture of our proposed new Machine Learning method. Based on Fast-SCNN, we proposed our new improvement method by adding GRU (Gated Recurrent Unit). The main idea of adding GRU to the existence of Fast-SCNN is to make a global context. That method can make the temporal effect on detection. 
+    Figure \ref{fig:ml_arch} visualize the architecture of our proposed new Machine Learning method. Based on Fast-SCNN, we proposed our new improvement method by adding GRU (Gated Recurrent Unit). The main idea of adding GRU to the existence of Fast-SCNN is to make a global context. This method introduces temporal consistency into the detection process.
 }
 
 \newcommand{\DatasetPreparation}{
@@ -151,7 +151,7 @@
     \begin{figure}[H] 
         \centering
         \includegraphics[width=\linewidth]{../konten/ml_dataset_fix.png}
-        \caption{DAtasets for Machine Learning}
+        \caption{Datasets for Machine Learning}
         \label{fig:ml_dataset}
     \end{figure}
 
@@ -160,11 +160,11 @@
 
 \newcommand{\ModelTraining}{
     \label{sec:model_training}
-    The model training process is carried out using the prepared dataset. The problem of our dataset is imbalanced data for example on figure \ref{fig:ml_dataset} in sub image b, there is a road bumb that have same color and pattern with road barrier but we want to predict that it's a road too. To handle that imbalanced data we use the Tversky loss function during training. The Tversky loss function can handle imbalanced data and bunch of false positive cases \cite{ref_tversky}. The important of the bunch of false positive cases is to avoid the vehicle from misdetecting the road area as non-road area, which can lead to unsafe driving conditions. 
+    The model training process is carried out using the prepared dataset. The problem of our dataset is imbalanced data for example on figure \ref{fig:ml_dataset} in sub image b, there is a road bump that have same color and pattern with road barrier but we want to predict that it's a road too. To handle that imbalanced data we use the Tversky loss function during training. The Tversky loss function can handle imbalanced data and bunch of false positive cases \cite{ref_tversky}. The importance of handling false positive cases is to avoid the vehicle from misdetecting the road area as non-road area, which can lead to unsafe driving conditions. 
     \par    
-    Another technique that we use to improve the model performance is data augmentation. Data augmentation is done by applying various transformations to the input images, such as random gamma, random brightness, CLAHE, HSV limit, RGB shift, random shadow, random sunflare, ISO noise, Motion blurr, random tone curve, and random brightness contrast. These transformations help to increase the diversity of the training data and improve the model's ability to generalize to unseen data.  
+    Another technique that we use to improve the model performance is data augmentation. Data augmentation is done by applying various transformations to the input images, such as random gamma, random brightness, CLAHE, HSV limit, RGB shift, random shadow, random sunflare, ISO noise, Motion blur, random tone curve, and random brightness contrast. These transformations help to increase the diversity of the training data and improve the model's ability to generalize to unseen data.  
     \par     
-    Another important aspect of the model training process is hyperparameter tuning. We experiment with different learning rates, batch sizes, and number of epochs to find the optimal combination that yields the best performance on the validation set. The model is trained using the Adam optimizer with an initial learning rate of 0.001 and a batch size of 12. The training is carried out for 200 epochs, with early stopping implemented to prevent overfitting. 
+    Another important aspect of the model training process is hyperparameter tuning. We experiment with different learning rates, batch sizes, and number of epochs to find the optimal combination that yields the best performance on the validation set. The model is trained using the Adam optimizer with an initial learning rate of 0.001 and a batch size of 12. The training is carried out for 400 epochs, with early stopping implemented to prevent overfitting. 
     \par     
     Figure \ref{fig:ml_arch} shows that there's a GRU block after the feature extractor block. In the training process we disable saving the global context because our dataset were very random and not sorted yet. 
 }
@@ -174,13 +174,13 @@
 }
 
 \newcommand{\PostProcessing}{
-    There is an important step of Road Segmentation called Post Processing. There are step by step that we have done in post processing. The first step is ROI crop that will erase all unused pixel that will not be the road. The second step is morphological operation, the morphological operation is done to remove small noise and fill small holes in the segmented image. The third step is largest contour detection, the largest contour detection is done to find the largest road area in the segmented image. The fourth step is doing a low pass filter between time steps for every pixel to make the segmentation result more stable. 
+    There is an important step of Road Segmentation called Post Processing. There are step by step that we have done in post processing. The first step is ROI crop that will erase all unused pixel that will not be the road. The second step is morphological operation, the morphological operation is done to remove small noise and fill small holes in the segmented image. The third step is largest contour detection, the largest contour detection is done to find the largest road area in the segmented image. The fourth step is applying a low pass filter between time steps for every pixel to make the segmentation result more stable. 
 }
 
 \newcommand{\FinalTransformation}{
     The final step of Road Segmentation is Final Transformation. The final transformation is done by using the calculated depth image from \ref{sec:depth_image_creation} to transform the segmented image from camera frame to base link frame. The output of this process is a laser scan msg that will be used by high level system to determine target velocity and steering angle. 
     \par    
-    The first process of final transformation is doing a high pass filter on segmented area. The high pass filter is done to get the edge of the road area. After that, we do a laser scan for 0 degree to 180 degree in base link frame with 0.01 degree resolution. For every angle, we search for the closest pixel that has segmented area in the depth image. The distance from base link frame to that pixel is the range value for that angle in laser scan msg.
+    The first process of final transformation is doing a high pass filter on segmented area. The high pass filter is done to get the edge of the road area. After that, we perform a virtual laser scan from 0 degree to 180 degree in base link frame with 0.01 degree resolution. For every angle, we search for the closest pixel that has segmented area in the depth image. The distance from base link frame to that pixel is the range value for that angle in laser scan msg.
 }
 
 
@@ -210,7 +210,7 @@
 }
 
 \newcommand{\LoopClosureDetection}{
-    After all the feature extraction has done, the next step is to find loop closure candidates. By doing first guess using GPS data (LoopGPS=true), the loop closure will only search for candidate inside LocalRadius searching area \cite{ref_rtabmap_real}. Like the method from \cite{ref_ku_icamimia}, the loop closure detection is done using feature matching between the current node and the nodes inside the LocalRadius searching area. The feature matching is done using ORB descriptors and RANSAC to filter out outliers. If the number of inliers is greater than a predefined threshold, the loop closure hypothesis is added. 
+    After all the feature extraction has done, the next step is to find loop closure candidates. By doing first guess using GPS data (LoopGPS=true), the loop closure will only search for candidate inside local radius searching area \cite{ref_rtabmap_real}. Like the method from \cite{ref_ku_icamimia}, the loop closure detection is done using feature matching between the current node and the nodes inside the local radius searching area. The feature matching is done using ORB descriptors and RANSAC to filter out outliers. If the number of inliers is greater than a predefined threshold, the loop closure hypothesis is added. 
 }
 
 \newcommand{\GraphOptimization}{
@@ -317,12 +317,13 @@
 }
 
 \newcommand{\SafetyTests}{
+    \label{sec:safety_tests}
     The ablation study of Safety Tests is done to evaluate the performance of the Safety System in various driving conditions by remove or add some feature condition. The Safety Tests are conducted in a controlled environment with predefined scenarios that simulate real-world driving situations. There are several scenarios that we have tested:
     \begin{itemize}
         \item Cloudy weather condition with low visibility. 
-        \item Condition where the camera cannot see anything because of obstrcuted by another vehicles. 
+        % \item Condition where the camera cannot see anything because of obstrcuted by another vehicles. 
         \item Multipath detection of GPS. 
-        \item So many false negative road segmentation from Machine Learning.
+        % \item So many false positive Road Segmentation from Machine Learning.
         \item Jitter pose estimation from Graph Based SLAM. 
     \end{itemize}
 }

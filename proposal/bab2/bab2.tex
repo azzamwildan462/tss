@@ -57,7 +57,7 @@ SLAM techniques can be divided into two broad categories: filter-based SLAM (e.g
 	\label{fig:basic_graph_based_slam}
 \end{figure} 
 
-There are three main process that can be seen from figure \ref{fig:basic_graph_based_slam}: The first process is sensor data, it means like acquiring data from sensors such as cameras, LIDAR, or IMU. The second process is front end process, The front end process is responsible for extracting features from the sensor data and finding a loop closure. The last process is back end process, the back end process is responsible for optimizing the graph to find the best estimate of the robot's trajectory and the map of the environment \cite{ref_gb_slam}.
+There are three main processes that can be seen from figure \ref{fig:basic_graph_based_slam}: The first process is sensor data, it means like acquiring data from sensors such as cameras, LIDAR, or IMU. The second process is front end process, The front end process is responsible for extracting features from the sensor data and finding a loop closure. The last process is back end process, the back end process is responsible for optimizing the graph to find the best estimate of the robot's trajectory and the map of the environment \cite{ref_gb_slam}.
 
 \par
 The optimization in Graph-based SLAM can be efficiently implemented using frameworks like GTSAM (Georgia Tech Smoothing and Mapping), a C++ library that applies nonlinear optimization over factor graphs. Factor graphs represent probabilistic relationships among variables such as odometry, landmarks, and sensor observations, and allow for efficient optimization of robot trajectories \cite{ref_gtsam}.
@@ -79,7 +79,7 @@ A key ML technique in robotic perception is semantic segmentation, which classif
 
 \section{Semantic Segmentation}
 
-Fast-SCNN (Fast Semantic Segmentation Convolutional Neural Network) was designed for real-time performance on resource-constrained devices, making it ideal for embedded systems like autonomous vehicles. It combines a lightweight encoder-decoder structure with efficient components such as depthwise separable convolutions and a streamlined feature fusion strategy. These design choices enable Fast-SCNN to achieve a good balance between accuracy and speed, ensuring that road segmentation can be performed in real time without requiring GPU-level hardware.
+Fast-SCNN (Fast Semantic Segmentation Convolutional Neural Network) was designed for real-time performance on resource-constrained devices, making it ideal for embedded systems like autonomous vehicles. It combines a lightweight encoder-decoder structure with efficient components such as depthwise separable convolutions and a streamlined feature fusion strategy. These design choices enable Fast-SCNN to achieve a good balance between accuracy and speed, ensuring that Road Segmentation can be performed in real time without requiring GPU-level hardware.
 
 \begin{figure}[H]
 	\centering

@@ -1,11 +1,14 @@
 \begin{spacing}{1}
 \input{./lib/identitasabstrakEng.tex}	
 %Tulis Abstrak disini
-Icar is an autonomous vehicle developed by Institut Teknologi Sepuluh Nopember (ITS) to autonomously navigate the campus environment. Its navigation system relies on pose estimation using sensor fusion between odometry and the Global Navigation Satellite System (GNSS). However, GNSS signals are prone to degradation in environments with obstacles such as tall buildings and trees, while odometry suffers from inaccuracies caused by wheel slippage, encoder drift, and inertial sensor errors. These limitations result in unreliable localization, potentially causing Icar to deviate from its designated trajectory.
+Icar is an autonomous vehicle developed by Institut Teknologi Sepuluh Nopember (ITS) to navigate the campus environment autonomously. Its previous navigation system relied on pose estimation through sensor fusion between odometry and the Global Navigation Satellite System (GNSS). However, GNSS signals are prone to degradation in environments with obstacles such as tall buildings and trees, while odometry suffers from wheel slippage, encoder drift, and inertial sensor errors. These limitations lead to unreliable localization, potentially causing Icar to deviate from its intended trajectory.
 
-To address these issues, this research proposes an enhanced navigation system by integrating a camera and LIDAR. Road detection is performed using a semantic segmentation model based on deep learning, enabling Icar to distinguish road surfaces from non-road areas. Pose refinement is carried out using graph-based optimization within a SLAM framework, incorporating data from the depth camera and LIDAR processed via the Iterative Closest Point (ICP) algorithm. The proposed system improves localization robustness and offers a GNSS-independent alternative for safe and accurate autonomous navigation. The final system is expected to reduce dependency on GNSS and increase Icar's reliability in semi-structured or dynamic environments.
+To address these challenges, this research proposes an enhanced navigation system by integrating a camera and LiDAR. Road detection is performed using a deep-learning-based semantic segmentation model, enabling Icar to distinguish road surfaces from non-road areas in real time. Pose refinement is achieved through graph-based optimization within a SLAM framework, incorporating depth camera and LiDAR data aligned using the Iterative Closest Point (ICP) algorithm. The proposed Graph-Based SLAM significantly improves pose estimation accuracy, reducing the maximum error from 2.24 meters to 0.10 meters and improving precision from 0.69 meters to 0.03 meters.
+
+Furthermore, the Road Segmentation module achieves a best IoU of 0.7928, with temporal filtering implemented through GRU embedding and frame-by-frame low-pass filtering to enhance segmentation stability. Overall, the integration of SLAM and machine learning provides a more robust and GNSS-independent navigation solution, improving Icar's reliability when operating in semi-structured or dynamic environments.
+    
 
 %Tulis Kata Kunci disini
 \vspace{2ex}
-\textbf{Keyword}: Autonomous vehicle, Icar, GNSS, Odometry, Pose Estimation, Camera, Semantic Segmentation, SLAM, ICP, Graph-Based Optimization, Deep Learning
+\textbf{Keyword}: Autonomous vehicle, Icar, GPS, Odometry, Pose Estimation, Camera, Semantic Segmentation, SLAM, ICP, Graph-Based Optimization, Deep Learning
 \end{spacing}

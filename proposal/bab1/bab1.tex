@@ -24,7 +24,7 @@
   A promising enhancement is the integration of a camera with LIDAR, which provides visual and depth information to detect roads. This road detection process employs a machine learning algorithm—specifically, semantic segmentation—trained on labeled datasets to distinguish between road and non-road areas \cite{ref_mas_pandu}.
   
   \par 
-  Beyond road detection, the camera and LIDAR is also used to refine pose estimation through graph-based optimization. Furthermore, a LIDAR sensor is incorporated and processed using the Iterative Closest Point (ICP) algorithm to further improve localization accuracy. Together, these methods form a Simultaneous Localization and Mapping (SLAM) system \cite{thrun2005probabilistic}, which is expected to potentially replace the role of GNSS entirely.
+  Beyond road detection, the camera and LIDAR are also used to refine pose estimation through graph-based optimization. Furthermore, a LIDAR sensor is incorporated and processed using the Iterative Closest Point (ICP) algorithm to further improve localization accuracy. Together, these methods form a Simultaneous Localization and Mapping (SLAM) system \cite{thrun2005probabilistic}, which is expected to potentially replace the role of GNSS entirely.
   
   \section{Formulation of the Problem}
   The main issue with Icar lies in its navigation system's heavy dependence on GNSS. When GNSS signal errors occur, or when odometry is affected by slippage or IMU drift, the resulting pose estimation becomes inaccurate. Consequently, Icar may deviate from its intended path, increasing the risk of collisions or deviation from public transportation routes.
